@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     texte=TTF_RenderText_Blended(police,"CodeBusters©",couleurBlanche);
 
 
-    bouton = SDL_LoadIMG("Rain.png");
+    bouton = SDL_LoadIMG("rain.png");
     SDL_Rect frame_position;
     frame_postion.x=0;
     frame_postion.y=0;
