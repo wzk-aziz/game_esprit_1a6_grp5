@@ -4,10 +4,20 @@
 #include<SDL/SDL_mixer.h>
 #include <SDL/SDL_ttf.h>
 
+
+int frame_postion (SDL_Rect *frame_position)
+{
+    if (frame_position<3200)
+        frame_position=frame_position+800;
+    else frame_position=0
+}
+
+
+
 int main(int argc, char *argv[])
 {  
 
-    SDL_Surface *texte=NULL,*ecran = NULL, *imageDeFond = NULL, *bouton = NULL,*bouton2 = NULL,*imageDeFond2 = NULL,*imageDeFond3 = NULL,*imageDeFond4 = NULL;
+    SDL_Surface *Rain,*texte=NULL,*ecran = NULL, *imageDeFond = NULL, *bouton = NULL,*bouton2 = NULL,*imageDeFond2 = NULL,*imageDeFond3 = NULL,*imageDeFond4 = NULL;
     TTF_Font *police=NULL;
     SDL_Color couleurBlanche={255,255,255};
     SDL_Rect positionFond,postexte;
@@ -16,8 +26,6 @@ int main(int argc, char *argv[])
     
     positionFond.x = 0;
     positionFond.y = 0;
-
-
 //son 
     Mix_Music *music1;
     Mix_Chunk *music;
@@ -36,8 +44,16 @@ int main(int argc, char *argv[])
     TTF_Init();
     police=TTF_OpenFont("angelina.ttf",40);
     texte=TTF_RenderText_Blended(police,"CodeBusters©",couleurBlanche);
-    
-    
+
+
+    bouton = SDL_LoadIMG("Rain.png");
+    SDL_Rect frame_position;
+    frame_postion.x=0;
+    frame_postion.y=0;
+    frame_postion.w=800;
+    frame_postion.h=600;
+
+
     imageDeFond= SDL_LoadBMP("Menusans.bmp");
     
     SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
@@ -78,8 +94,8 @@ int main(int argc, char *argv[])
     while (continuer)
 
     {
-
-        SDL_WaitEvent(&event);
+        frame_postion (&frame_position);
+        SDL_PollEvent(&event);
 
         switch(event.type)
 
@@ -141,9 +157,11 @@ int main(int argc, char *argv[])
         
         if (i % 4 ==0  ){
                                 SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                                SDL_BlitSurface(Rain, &frame_position, ecran, NULL);
                                 bouton = SDL_LoadBMP("exit.bmp");
                                 positionFond.x = 600;
                                 positionFond.y = 280;
+
                                 SDL_BlitSurface(bouton, NULL, ecran, &positionFond);
                                 
                                 SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
@@ -168,6 +186,8 @@ int main(int argc, char *argv[])
 
                     } else if (i % 4==1 ) {
                             SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                                SDL_BlitSurface(Rain, &frame_position, ecran, NULL);
+
                             bouton = SDL_LoadBMP("exit.bmp");
                             positionFond.x = 600;
                             positionFond.y = 280;
@@ -195,6 +215,7 @@ int main(int argc, char *argv[])
                     } else if (i % 4==2 ) {
 
                             SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                             SDL_BlitSurface(Rain, &frame_position, ecran, NULL);
                             bouton = SDL_LoadBMP("exit.bmp");
                             positionFond.x = 600;
                             positionFond.y = 280;
@@ -222,6 +243,7 @@ int main(int argc, char *argv[])
                     } else if (i % 4==3 ) {
 
                             SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                             SDL_BlitSurface(Rain, &frame_position, ecran, NULL);
                             bouton = SDL_LoadBMP("exit2.bmp");
                             positionFond.x = 600;
                             positionFond.y = 280;
