@@ -7,9 +7,9 @@
 
 int frame_postion (SDL_Rect *frame_position)
 {
-    if (frame_position<3200)
-        frame_position=frame_position+800;
-    else frame_position=0
+    if ((*frame_position).x<3200)
+        (*frame_position).x=(*frame_position).x+800;
+    else (*frame_position).x=0
 }
 
 
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     texte=TTF_RenderText_Blended(police,"CodeBusters©",couleurBlanche);
 
 
-    bouton = SDL_LoadIMG("Rain.png");
+    bouton = IMG_Load("Rain.png");
     SDL_Rect frame_position;
     frame_postion.x=0;
     frame_postion.y=0;
