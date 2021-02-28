@@ -5,11 +5,14 @@
 #include <SDL/SDL_ttf.h>
 
 
-int frame_postion (SDL_Rect *frame_position)
+
+
+
+int rain_move (SDL_Rect *frame_position)
 {
-    if ((*frame_position).x<3200)
+    if ((*frame_position).x<2400)
         (*frame_position).x=(*frame_position).x+800;
-    else (*frame_position).x=0
+    else (*frame_position).x=0;
 }
 
 
@@ -17,12 +20,12 @@ int frame_postion (SDL_Rect *frame_position)
 int main(int argc, char *argv[])
 {  
 
-    SDL_Surface *Rain,*texte=NULL,*ecran = NULL, *imageDeFond = NULL, *bouton = NULL,*bouton2 = NULL,*imageDeFond2 = NULL,*imageDeFond3 = NULL,*imageDeFond4 = NULL;
+    SDL_Surface *Rain,*texte=NULL,*ecran = NULL, *imageDeFond = NULL, *bouton = NULL,*bouton2 = NULL;
     TTF_Font *police=NULL;
     SDL_Color couleurBlanche={255,255,255};
     SDL_Rect positionFond,postexte;
     SDL_Event event,event2; 
-    int continuer=1 ,i,mousex,mousey; 
+    int continuer=1 ,i,mousex,mousey,couleurNoire; 
     
     positionFond.x = 0;
     positionFond.y = 0;
@@ -37,7 +40,7 @@ int main(int argc, char *argv[])
     Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
     SDL_Init(SDL_INIT_VIDEO);
 
-    ecran = SDL_SetVideoMode(800,600, 32, SDL_HWSURFACE);
+    ecran = SDL_SetVideoMode(800,600, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
     SDL_WM_SetCaption("Game", NULL);
 
     //text
@@ -46,14 +49,16 @@ int main(int argc, char *argv[])
     texte=TTF_RenderText_Blended(police,"CodeBusters©",couleurBlanche);
 
 
-
-    bouton = IMG_Load("rain.png");
-
+  
+    
+    couleurNoire= SDL_MapRGB(ecran -> format, 0, 0, 0);
+    Rain= IMG_Load("rain.png");
+    SDL_SetColorKey(Rain, SDL_SRCCOLORKEY | SDL_RLEACCEL,couleurNoire);
     SDL_Rect frame_position;
-    frame_postion.x=0;
-    frame_postion.y=0;
-    frame_postion.w=800;
-    frame_postion.h=600;
+    frame_position.x=0;
+    frame_position.y=0;
+    frame_position.w=800;
+    frame_position.h=600;
 
 
     imageDeFond= SDL_LoadBMP("Menusans.bmp");
@@ -95,8 +100,9 @@ int main(int argc, char *argv[])
     SDL_WM_SetCaption("Menu", NULL);
     while (continuer)
 
-    {
-        frame_postion (&frame_position);
+    { 
+        SDL_Delay(60);
+        rain_move (&frame_position);
         SDL_PollEvent(&event);
 
         switch(event.type)
@@ -158,7 +164,8 @@ int main(int argc, char *argv[])
 
         
         if (i % 4 ==0  ){
-                                SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                                SDL_BlitSurface(imageDeFond, NULL, ecran, NULL);
+                                SDL_BlitSurface(texte, NULL, ecran, &postexte);
                                 SDL_BlitSurface(Rain, &frame_position, ecran, NULL);
                                 bouton = SDL_LoadBMP("exit.bmp");
                                 positionFond.x = 600;
@@ -166,19 +173,19 @@ int main(int argc, char *argv[])
 
                                 SDL_BlitSurface(bouton, NULL, ecran, &positionFond);
                                 
-                                SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                                
                                 bouton = SDL_LoadBMP("newgame2.bmp");
                                 positionFond.x = 600;
                                 positionFond.y = 100;
                                 SDL_BlitSurface(bouton, NULL, ecran, &positionFond);
                 
-                                SDL_BlitSurface(imageDeFond4, NULL, ecran, &positionFond);
+                               ;
                                 bouton = SDL_LoadBMP("option.bmp");
                                 positionFond.x = 600;
                                 positionFond.y = 220;
                                 SDL_BlitSurface(bouton, NULL, ecran, &positionFond);
 
-                                SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                                
                                 bouton = SDL_LoadBMP("loadgame.bmp");
                                 positionFond.x = 600;
                                 positionFond.y = 160;
@@ -187,7 +194,8 @@ int main(int argc, char *argv[])
                                 SDL_Flip(ecran);
 
                     } else if (i % 4==1 ) {
-                            SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                           SDL_BlitSurface(imageDeFond, NULL, ecran, NULL);
+                            SDL_BlitSurface(texte, NULL, ecran, &postexte);
                                 SDL_BlitSurface(Rain, &frame_position, ecran, NULL);
 
                             bouton = SDL_LoadBMP("exit.bmp");
@@ -195,19 +203,18 @@ int main(int argc, char *argv[])
                             positionFond.y = 280;
                             SDL_BlitSurface(bouton, NULL, ecran, &positionFond);
 
-                            SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
                             bouton = SDL_LoadBMP("loadgame2.bmp");
                             positionFond.x = 600;
                             positionFond.y = 160;
                             SDL_BlitSurface(bouton, NULL, ecran, &positionFond);
 
-                            SDL_BlitSurface(imageDeFond2, NULL, ecran, &positionFond);
+                      
                             bouton = SDL_LoadBMP("option.bmp");
                             positionFond.x = 600;
                             positionFond.y = 220;
                             SDL_BlitSurface(bouton, NULL, ecran, &positionFond);
 
-                            SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                        
                             bouton = SDL_LoadBMP("newgame.bmp");
                             positionFond.x = 600;
                             positionFond.y = 100;
@@ -215,27 +222,27 @@ int main(int argc, char *argv[])
 
                          SDL_Flip(ecran);
                     } else if (i % 4==2 ) {
-
-                            SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                            SDL_BlitSurface(imageDeFond, NULL, ecran, NULL);
+                           SDL_BlitSurface(texte, NULL, ecran, &postexte);
                              SDL_BlitSurface(Rain, &frame_position, ecran, NULL);
                             bouton = SDL_LoadBMP("exit.bmp");
                             positionFond.x = 600;
                             positionFond.y = 280;
                             SDL_BlitSurface(bouton, NULL, ecran, &positionFond);
 
-                            SDL_BlitSurface(imageDeFond2, NULL, ecran, &positionFond);
+                          
                             bouton = SDL_LoadBMP("option2.bmp");
                             positionFond.x = 600;
                             positionFond.y = 220;
                             SDL_BlitSurface(bouton, NULL, ecran, &positionFond);
 
-                            SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                     
                             bouton = SDL_LoadBMP("newgame.bmp");
                             positionFond.x = 600;
                             positionFond.y = 100;
                             SDL_BlitSurface(bouton, NULL, ecran, &positionFond);
 
-                            SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                      
                             bouton = SDL_LoadBMP("loadgame.bmp");
                             positionFond.x = 600;
                             positionFond.y = 160;
@@ -243,27 +250,27 @@ int main(int argc, char *argv[])
 
                             SDL_Flip(ecran);
                     } else if (i % 4==3 ) {
-
-                            SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                            SDL_BlitSurface(imageDeFond, NULL, ecran, NULL);
+                            SDL_BlitSurface(texte, NULL, ecran, &postexte);
                              SDL_BlitSurface(Rain, &frame_position, ecran, NULL);
                             bouton = SDL_LoadBMP("exit2.bmp");
                             positionFond.x = 600;
                             positionFond.y = 280;
                             SDL_BlitSurface(bouton, NULL, ecran, &positionFond);
 
-                            SDL_BlitSurface(imageDeFond2, NULL, ecran, &positionFond);
+                         
                             bouton = SDL_LoadBMP("option.bmp");
                             positionFond.x = 600;
                             positionFond.y = 220;
                             SDL_BlitSurface(bouton, NULL, ecran, &positionFond);
                             
-                            SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                          
                             bouton = SDL_LoadBMP("newgame.bmp");
                             positionFond.x = 600;
                             positionFond.y = 100;
                             SDL_BlitSurface(bouton, NULL, ecran, &positionFond);
 
-                            SDL_BlitSurface(imageDeFond3, NULL, ecran, &positionFond);
+                        
                             bouton = SDL_LoadBMP("loadgame.bmp");
                             positionFond.x = 600;
                             positionFond.y = 160;
