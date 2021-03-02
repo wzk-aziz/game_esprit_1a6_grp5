@@ -122,10 +122,11 @@ int main(int argc, char *argv[])
 
     { 
         SDL_Delay(60);
-        rain_move (&frame_position);
-        SDL_PollEvent(&event);
+        
         while (Menu_state==1)
-        {switch(event.type)
+        {rain_move (&frame_position);
+        SDL_PollEvent(&event);
+            switch(event.type)
 
         {
 
@@ -308,10 +309,13 @@ int main(int argc, char *argv[])
         }
             while (Menu_state==2)
             {
+
                 Mix_VolumeMusic(volume);
                 Mix_Volume(1,volume);
                  sprintf(volume_text, "Volume : %d", volume);
                  volume_level=TTF_RenderText_Blended(police,volume_text,couleurBlanche);
+
+        SDL_PollEvent(&event);
                  switch(event.type)
                  {
                      case SDL_QUIT:
