@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     SDL_Rect pos_volume;
     SDL_Surface *Rain,*texte=NULL,*ecran = NULL, *imageDeFond = NULL, *bouton = NULL,*bouton2 = NULL,*mute_button,*voulme_up,*volume_down,*fullscreen_button,*unmute_button,*volume_level;
     TTF_Font *police=NULL;
-    SDL_Rect pos_volume_down,pos_volume_up,pos_mute,pos_fullscreen,pos_back;
+    SDL_Rect pos_volume_down,pos_volume_up,pos_mute,pos_fullscreen,pos_back,pos_arrow;
     SDL_Color couleurBlanche={255,255,255};
     SDL_Rect positionFond,postexte;
     SDL_Event event,event2; 
@@ -62,6 +62,8 @@ int main(int argc, char *argv[])
   
     pos_volume_down.x=215;
     pos_volume_down.y=250;
+    
+    pos_arrow.x=50;
     pos_volume_up.x=500;
     pos_volume_up.y=250;
     pos_volume.x=200;
@@ -319,6 +321,11 @@ int main(int argc, char *argv[])
         }
             while (Menu_state==2)
             {   
+                if (k==0)
+                    pos_arrow.y=100;
+                else 
+                    pos_arrow.y=250;
+
                  SDL_BlitSurface(imageDeFond, NULL, ecran, NULL);
                 SDL_BlitSurface(fullscreen_button, NULL, ecran, &pos_fullscreen);
                  SDL_BlitSurface(voulme_up, NULL, ecran, &pos_volume_up);
@@ -327,6 +334,8 @@ int main(int argc, char *argv[])
                  SDL_BlitSurface(unmute_button, NULL, ecran, &pos_mute);
                 else 
                     SDL_BlitSurface(mute_button, NULL, ecran, &pos_mute);
+                SDL_BlitSurface(volume_level, NULL, ecran, &pos_volume);
+                SDL_BlitSurface(voulme_up, NULL, ecran, &pos_arrow);
                 SDL_Flip(ecran);
                 Mix_VolumeMusic(volume);
                 Mix_Volume(1,volume);
@@ -412,7 +421,8 @@ int main(int argc, char *argv[])
                  SDL_BlitSurface(unmute_button, NULL, ecran, &pos_mute);
                 else 
                     SDL_BlitSurface(mute_button, NULL, ecran, &pos_mute);
-                SDL_BlitSurface(volume_level, NULL, ecran, &pos_volume);
+                 SDL_BlitSurface(volume_level, NULL, ecran, &pos_volume);
+                SDL_BlitSurface(voulme_up, NULL, ecran, &pos_arrow);
                 SDL_Flip(ecran);
 
 
