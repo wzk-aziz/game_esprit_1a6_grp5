@@ -121,10 +121,12 @@ int main(int argc, char *argv[])
     while (continuer)
 
     { 
-        SDL_Delay(60);
+       
         
         while (Menu_state==1)
-        {rain_move (&frame_position);
+        {
+            rain_move (&frame_position);
+             SDL_Delay(60);
         SDL_PollEvent(&event);
             switch(event.type)
 
@@ -303,17 +305,24 @@ int main(int argc, char *argv[])
                                                  if (event.key.keysym.sym==SDLK_RETURN) 
                                      {       
                                         if(i % 4==3 )
-                  
+                                            {
                                              continuer=0;
+                                             Menu_state=0;
+                                            }
+                                        if(i % 4==2 )
+                                            {
+                                             Menu_state=2;
+                                            }    
                                       }
         }
             while (Menu_state==2)
-            {
+            {   
 
                 Mix_VolumeMusic(volume);
                 Mix_Volume(1,volume);
                  sprintf(volume_text, "Volume : %d", volume);
                  volume_level=TTF_RenderText_Blended(police,volume_text,couleurBlanche);
+                 SDL_Delay(60);
 
         SDL_PollEvent(&event);
                  switch(event.type)
