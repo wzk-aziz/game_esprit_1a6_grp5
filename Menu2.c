@@ -360,13 +360,14 @@ int main(int argc, char *argv[])
                     if (k==0)
                         k=1;
                     else k--;
+                    break;
                     case SDLK_RETURN:
                                         Mix_PlayChannel(1,music,0);
 
                     if (k==0)
                         SDL_WM_ToggleFullScreen(ecran);
                     if (k==1)
-                        if (muted==1)
+                        {if (muted==1)
                            { volume=0;
                              muted=1;
                            }
@@ -376,6 +377,7 @@ int main(int argc, char *argv[])
                                 muted=0;
                             
                             }
+                         }   
                     break;
                     case SDLK_RIGHT:
 
@@ -410,6 +412,7 @@ int main(int argc, char *argv[])
                  SDL_BlitSurface(unmute_button, NULL, ecran, &pos_mute);
                 else 
                     SDL_BlitSurface(mute_button, NULL, ecran, &pos_mute);
+                SDL_BlitSurface(volume_level, NULL, ecran, &pos_volume);
                 SDL_Flip(ecran);
 
 
