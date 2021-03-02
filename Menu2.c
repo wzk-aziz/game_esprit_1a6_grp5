@@ -19,7 +19,7 @@ int rain_move (SDL_Rect *frame_position)
 
 int main(int argc, char *argv[])
 {  
-
+    SDL_Rect pos_volume;
     SDL_Surface *Rain,*texte=NULL,*ecran = NULL, *imageDeFond = NULL, *bouton = NULL,*bouton2 = NULL,*mute_button,*voulme_up,*volume_down,*fullscreen_button,*unmute_button,*volume_level;
     TTF_Font *police=NULL;
     SDL_Rect pos_volume_down,pos_volume_up,pos_mute,pos_fullscreen,pos_back;
@@ -319,6 +319,7 @@ int main(int argc, char *argv[])
         }
             while (Menu_state==2)
             {   
+                 SDL_BlitSurface(imageDeFond, NULL, ecran, NULL);
                 SDL_BlitSurface(fullscreen_button, NULL, ecran, &pos_fullscreen);
                  SDL_BlitSurface(voulme_up, NULL, ecran, &pos_volume_up);
                  SDL_BlitSurface(volume_down, NULL, ecran, &pos_volume_down);
@@ -400,6 +401,8 @@ int main(int argc, char *argv[])
                     }   
                  }
              }
+                                SDL_BlitSurface(imageDeFond, NULL, ecran, NULL);
+
                  SDL_BlitSurface(fullscreen_button, NULL, ecran, &pos_fullscreen);
                  SDL_BlitSurface(voulme_up, NULL, ecran, &pos_volume_up);
                  SDL_BlitSurface(volume_down, NULL, ecran, &pos_volume_down);
