@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     SDL_Event event,event2; 
     int continuer=1 ,i,mousex,mousey,couleurNoire; 
     int Menu_state=1;
-    int volume;
+    int volume=100;
     char volume_text[50];
     int k=0;
     int muted=0;
@@ -409,7 +409,9 @@ int main(int argc, char *argv[])
                     case SDLK_BACKSPACE:
                     Menu_state=1;
                     break;
-                    }   
+
+                    } 
+                    break;  
                  }
              }
                                 SDL_BlitSurface(imageDeFond, NULL, ecran, NULL);
