@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
     volume_level=TTF_RenderText_Blended(police,volume_text,couleurBlanche);
     mute_button=IMG_Load("mute.jpg");
     voulme_up=IMG_Load("sound+.png");
-    volume_down=IMG_Load("sound-.png")
+    volume_down=IMG_Load("sound-.png");
     fullscreen_button=IMG_Load("Square Simple.jpg");
     unmute_button=IMG_Load("Unmuted.jpg");
   
@@ -322,7 +322,7 @@ int main(int argc, char *argv[])
 
                     case SDL_KEYDOWN: {
 
-                    switch(event.key.keysym.sym)
+                    switch(event.key.keysym.sym){
 
                     case SDLK_DOWN:
                     if (k==1)
@@ -361,6 +361,7 @@ int main(int argc, char *argv[])
                     break;
                     }   
                  }
+             }
                  SDL_BlitSurface(fullscreen_button, NULL, ecran, &pos_fullscreen);
                  SDL_BlitSurface(voulme_up, NULL, ecran, &pos_volume_up);
                  SDL_BlitSurface(volume_down, NULL, ecran, &pos_volume_down);
