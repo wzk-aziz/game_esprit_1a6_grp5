@@ -20,16 +20,21 @@ int rain_move (SDL_Rect *frame_position)
 int main(int argc, char *argv[])
 {  
 
-    SDL_Surface *Rain,*texte=NULL,*ecran = NULL, *imageDeFond = NULL, *bouton = NULL,*bouton2 = NULL;
+    SDL_Surface *Rain,*texte=NULL,*ecran = NULL, *imageDeFond = NULL, *bouton = NULL,*bouton2 = NULL,*mute_button,*voulme_up,*volume_down,*fullscreen_button,*unmute_button,*volume_level;
     TTF_Font *police=NULL;
+    SDL_Rect pos_volume_down,pos_volume_up,pos_mute,pos_fullscreen,pos_back;
     SDL_Color couleurBlanche={255,255,255};
     SDL_Rect positionFond,postexte;
     SDL_Event event,event2; 
     int continuer=1 ,i,mousex,mousey,couleurNoire; 
-    
+    int Menu_state=1;
+    int volume;
+    char volume_text[50];
+    int k=0;
+    int muted=0;
     positionFond.x = 0;
     positionFond.y = 0;
-//son 
+    //son 
     Mix_Music *music1;
     Mix_Chunk *music;
     Mix_AllocateChannels(2);
@@ -44,13 +49,28 @@ int main(int argc, char *argv[])
     SDL_WM_SetCaption("Game", NULL);
 
     //text
+    sprintf(volume_text, "volume : %d", volume);
     TTF_Init();
     police=TTF_OpenFont("angelina.ttf",40);
     texte=TTF_RenderText_Blended(police,"CodeBusters©",couleurBlanche);
-
-
+    volume_level=TTF_RenderText_Blended(police,volume_text,couleurBlanche);
+    mute_button=IMG_Load("mute.jpg");
+    voulme_up=IMG_Load("sound+.png");
+    volume_down=IMG_Load("sound-.png")
+    fullscreen_button=IMG_Load("Square Simple.jpg");
+    unmute_button=IMG_Load("Unmuted.jpg");
   
-    
+    pos_volume_down.x=215;
+    pos_volume_down.y=250;
+    pos_volume_up.x=500;
+    pos_volume_up.y=250;
+    pos_mute.x=362;
+    pos_mute.y=250;
+    pos_fullscreen.x=352;
+    pos_fullscreen.y=100;
+    pos_back.x=250;
+    pos_back.y=460;
+
     couleurNoire= SDL_MapRGB(ecran -> format, 0, 0, 0);
     Rain= IMG_Load("rain.png");
     SDL_SetColorKey(Rain, SDL_SRCCOLORKEY | SDL_RLEACCEL,couleurNoire);
@@ -104,8 +124,8 @@ int main(int argc, char *argv[])
         SDL_Delay(60);
         rain_move (&frame_position);
         SDL_PollEvent(&event);
-
-        switch(event.type)
+        while (Menu_state==1)
+        {switch(event.type)
 
         {
 
@@ -281,11 +301,78 @@ int main(int argc, char *argv[])
                             SDL_Flip(ecran);
                                                  if (event.key.keysym.sym==SDLK_RETURN) 
                                      {       
-                                        if(i==3)
+                                        if(i % 4==3 )
                   
                                              continuer=0;
                                       }
+        }
+            while (Menu_state==2)
+            {
+                Mix_VolumeMusic(volume);
+                Mix_Volume(1,volume);
+                 sprintf(volume_text, "Volume : %d", volume);
+                 volume_level=TTF_RenderText_Blended(police,volume_text,couleurBlanche);
+                 switch(event.type)
+                 {
+                     case SDL_QUIT:
 
+                    continuer = 0;
+
+                     break;
+
+                    case SDL_KEYDOWN: {
+
+                    switch(event.key.keysym.sym)
+
+                    case SDLK_DOWN:
+                    if (k==1)
+                        k=0;
+                    else k++;
+                    break;
+                    case SDLK_UP:
+                    if (k==0)
+                        k=1;
+                    else k--;
+                    case SDLK_RETURN:
+                    if (k==0)
+                        SDL_WM_ToggleFullScreen(ecran);
+                    if (k==1)
+                        if (muted==1)
+                           { volume=0;
+                             muted=1;
+                           }
+                        else
+                            {
+                                volume=100;
+                                muted=0;
+                            
+                            }
+                    break;
+                    case SDLK_RIGHT:
+                    if (volume<100)
+                        volume=volume+10;
+                    break;
+                    case SDLK_LEFT:
+                    if (volume>0)
+                        volume=volume-10;
+                    break;
+                    case SDLK_BACKSPACE:
+                    Menu_state=1;
+                    break;
+                    }   
+                 }
+                 SDL_BlitSurface(fullscreen_button, NULL, ecran, &pos_fullscreen);
+                 SDL_BlitSurface(voulme_up, NULL, ecran, &pos_volume_up);
+                 SDL_BlitSurface(volume_down, NULL, ecran, &pos_volume_down);
+                 if (muted==0)
+                 SDL_BlitSurface(unmute_button, NULL, ecran, &pos_mute);
+                else 
+                    SDL_BlitSurface(mute_button, NULL, ecran, &pos_mute);
+
+
+
+
+            }   
        
 }
 
