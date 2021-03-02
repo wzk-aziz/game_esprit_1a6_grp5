@@ -64,6 +64,8 @@ int main(int argc, char *argv[])
     pos_volume_down.y=250;
     pos_volume_up.x=500;
     pos_volume_up.y=250;
+    pos_volume.x=200;
+    pos_volume.y=400;
     pos_mute.x=362;
     pos_mute.y=250;
     pos_fullscreen.x=352;
@@ -317,7 +319,14 @@ int main(int argc, char *argv[])
         }
             while (Menu_state==2)
             {   
-
+                SDL_BlitSurface(fullscreen_button, NULL, ecran, &pos_fullscreen);
+                 SDL_BlitSurface(voulme_up, NULL, ecran, &pos_volume_up);
+                 SDL_BlitSurface(volume_down, NULL, ecran, &pos_volume_down);
+                 if (muted==0)
+                 SDL_BlitSurface(unmute_button, NULL, ecran, &pos_mute);
+                else 
+                    SDL_BlitSurface(mute_button, NULL, ecran, &pos_mute);
+                SDL_Flip(ecran);
                 Mix_VolumeMusic(volume);
                 Mix_Volume(1,volume);
                  sprintf(volume_text, "Volume : %d", volume);
@@ -338,15 +347,21 @@ int main(int argc, char *argv[])
                     switch(event.key.keysym.sym){
 
                     case SDLK_DOWN:
+                                        Mix_PlayChannel(1,music,0);
+
                     if (k==1)
                         k=0;
                     else k++;
                     break;
                     case SDLK_UP:
+                                        Mix_PlayChannel(1,music,0);
+
                     if (k==0)
                         k=1;
                     else k--;
                     case SDLK_RETURN:
+                                        Mix_PlayChannel(1,music,0);
+
                     if (k==0)
                         SDL_WM_ToggleFullScreen(ecran);
                     if (k==1)
@@ -362,12 +377,22 @@ int main(int argc, char *argv[])
                             }
                     break;
                     case SDLK_RIGHT:
+
+                                        Mix_PlayChannel(1,music,0);
+
+                    if (k==1)
+                    {
                     if (volume<100)
                         volume=volume+10;
+                }   
                     break;
                     case SDLK_LEFT:
+                                        Mix_PlayChannel(1,music,0);
+                    if (k==1)
+                    {                    
                     if (volume>0)
                         volume=volume-10;
+                    }
                     break;
                     case SDLK_BACKSPACE:
                     Menu_state=1;
@@ -382,6 +407,7 @@ int main(int argc, char *argv[])
                  SDL_BlitSurface(unmute_button, NULL, ecran, &pos_mute);
                 else 
                     SDL_BlitSurface(mute_button, NULL, ecran, &pos_mute);
+                SDL_Flip(ecran);
 
 
 
