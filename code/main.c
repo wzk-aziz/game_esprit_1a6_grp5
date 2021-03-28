@@ -17,6 +17,6 @@ int main ()
     background = SDL_DisplayFormat(temp);
     SDL_FreeSurface(temp);
     while (continuer)
-    animerEnnemiwalking(E, screen);
+    animerEnnemiwalking(&E, screen);
 
 }
