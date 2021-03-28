@@ -17,6 +17,7 @@ int main ()
     grass = SDL_DisplayFormat(temp);
     SDL_FreeSurface(temp);
     while (continuer)
+    SDL_Delay(50);
     animerEnnemiwalking(&E, screen);
 
 }

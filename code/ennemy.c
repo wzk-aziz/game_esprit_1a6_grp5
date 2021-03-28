@@ -7,18 +7,14 @@ void animerEnnemiwalking(ennemi *e, SDL_Surface *screen)
 	e->postion_sprite.w=64;
 	e->postion_sprite.h=64;
 	e->direction = 1;
+	e->postion_sprite.y=128;
 	printf("///////////////////1\n");
 	if (e->direction == 1)
 	{
-		e->postion_sprite.y=128;
-		switch (e->postion_sprite.x)
+		e->postion_sprite.x=e->postion_sprite.x-64;
+		if (e->postion_sprite.x<0)
 		{
-			case 0:
-			e->postion_sprite.x=512;
-			break;
-			default:
-			e->postion_sprite.x-=64;
-			break;
+			e->postion_sprite.x=512;	
 		}
 	}
 	printf("///////////////////2\n");
