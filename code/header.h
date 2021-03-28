@@ -8,8 +8,8 @@
 #include <SDL/SDL_ttf.h>
 #include "ennemy.h"
 
-SDL_Surface *ennemy,*temp,*screen,background;
-ennemi E;
+SDL_Surface *grass,*ennemy,*temp,*screen,*background;
+
 
 
 #endif // HEADER_H

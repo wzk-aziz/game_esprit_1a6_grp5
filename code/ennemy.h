@@ -6,7 +6,7 @@
 #include<SDL/SDL_image.h>
 #include<SDL/SDL_mixer.h>
 #include <SDL/SDL_ttf.h>
-
+#include "header.h"
 
 typedef struct 
 {
@@ -15,7 +15,7 @@ typedef struct
 	SDL_Rect postion_sprite;
 	int ennemy_type;
 	int direction;
-};ennemi;
+}ennemi;
 void animerEnnemiwalking(ennemi *e, SDL_Surface * screen);
 
 #endif // ENNEMY_H

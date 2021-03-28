@@ -1,33 +1,32 @@
 
-#include "ennemy.h";
+#include "ennemy.h"
+#include "header.h"
 
-
-void animerEnnemiwalking(ennemi *e, SDL_Surface * screen)
+void animerEnnemiwalking(ennemi *e, SDL_Surface *screen)
 {
-	SDL_Rect postion;
-	if (*e.direction == 1)
+	if (*e->direction == 1)
 	{
-		*e.postion_sprite.y=128;
-		switch *e.postion_sprite.x
+		*e->postion_sprite.y=128;
+		switch (*e->postion_sprite.x)
 		{
 			case 0:
-			*e.postion_sprite.x=512;
+			*e->postion_sprite.x=512;
 			break;
 			default:
-			*e.postion_sprite.x-=64;
+			*e->postion_sprite.x-=64;
 			break;
 		}
 	}
-	if (*e.direction == 2)
+	if (*e->direction == 2)
 	{
-		*e.postion_sprite.y=192;
-		switch e.postion_sprite.x
+		*e->postion_sprite.y=192;
+		switch (*e->postion_sprite.x)
 		{
 			case 512:
-			*e.postion_sprite.x=0;
+			*e->postion_sprite.x=0;
 			break;
 			default:
-			*e.postion_sprite.x+=64;
+			*e->postion_sprite.x+=64;
 			break;
 		}
 	}
@@ -39,7 +38,7 @@ void animerEnnemiwalking(ennemi *e, SDL_Surface * screen)
                 SDL_BlitSurface(grass, NULL, screen, &position);
             }
         }
-	SDL_BlitSurface(ennemy, &(*e.postion_sprite), *screen, &(*e.postion_ecran));
-	SDL_Flip((*screen));
+	SDL_BlitSurface(ennemy, &(*e->postion_sprite), screen, &(*e->postion_ecran));
+	SDL_Flip((screen));
 }
 

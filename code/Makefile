@@ -1,8 +1,8 @@
-prog:fonctions.o main.o
-	gcc ennemy.o ennemy.o -o prog -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf  -g
+prog:ennemy.o main.o
+	gcc ennemy.o main.o -o prog -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf  -g
 main.o:main.c
 	gcc -c main.c -g
-fonctions.o:ennemy.c
+ennemy.o:ennemy.c
 	gcc -c ennemy.c -g
 clean: 
 	rm -fr prog
