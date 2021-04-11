@@ -10,7 +10,7 @@ int main()
     int continuer=1,couleurNoire;
     SDL_Init(SDL_INIT_VIDEO);
     screen = SDL_SetVideoMode(700, 500, 0, 0);
-    E.postion_ecran.x=600;
+    E.postion_ecran.x=300;
     E.postion_ecran.y=417;
     E.postion_sprite.x=0;
     temp= IMG_Load("Skeleton_Sprite_sheet.png");
