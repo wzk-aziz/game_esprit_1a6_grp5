@@ -3,16 +3,16 @@
 
 int main()
 {
+    
     ennemi E;
-
+    E.direction=1;
+    E.pas=0;
     int continuer=1,couleurNoire;
     SDL_Init(SDL_INIT_VIDEO);
-
     screen = SDL_SetVideoMode(700, 500, 0, 0);
     E.postion_ecran.x=500;
     E.postion_ecran.y=417;
-	
-    temp   = IMG_Load("Skeleton_Sprite_sheet.png");
+    temp= IMG_Load("Skeleton_Sprite_sheet.png");
     ennemy = SDL_DisplayFormat(temp);
     SDL_FreeSurface(temp);
     temp  = IMG_Load("background12.png");
@@ -22,11 +22,13 @@ int main()
     SDL_SetColorKey(ennemy, SDL_SRCCOLORKEY | SDL_RLEACCEL,couleurNoire);
     SDL_Flip(screen);
     
-    while (continuer)
-   { 
-    animerEnnemiwalking(&E, screen);
-    Ennemiwalking(&E);
+    while (continuer){
+
+            animerEnnemiwalking(&E, screen);
+Ennemiwalking(&E);
     }
+    
+    
 }
 
 

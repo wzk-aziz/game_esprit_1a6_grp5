@@ -22,7 +22,7 @@ void animerEnnemiwalking(ennemi *e, SDL_Surface *screen)
 		}
 
 	}
-	//printf("///////////////////2\n");
+
 	if (e->direction == 2)
 	{   
 		
@@ -39,9 +39,7 @@ void animerEnnemiwalking(ennemi *e, SDL_Surface *screen)
 
 		}
 	}
-	//printf("///////////////////3\n");
 	
-	SDL_Delay(16);
 
       SDL_BlitSurface(grass,NULL,screen,NULL);
 	 for (int x = 0; x < 700 / 64; x++) {
@@ -65,22 +63,23 @@ void animerEnnemiwalking(ennemi *e, SDL_Surface *screen)
                     
 void Ennemiwalking(ennemi *e)
 {
+	
 	if (e->pas==0)
 	{
 		e->direction=randomer(1, 2);
 		e->pas=randomer(10, 20);
 	}
-	if (e->direction==1)
+	if (e->direction==1 && e->pas!=0)
 	{
-		e->postion_ecran.x-=2;
+		e->postion_ecran.x-=1;
 		e->pas-=1;
 	}
-	if (e->direction==2)
+	if (e->direction==2 && e->pas!=0)
 	{
 		e->postion_ecran.x+=2;
 		e->pas-=1;
 	}
-
+SDL_Delay(16);
 }
 
 int randomer(int min, int max) 

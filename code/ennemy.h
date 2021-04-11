@@ -10,6 +10,7 @@
 
 typedef struct 
 {
+	
 	int status;
 	SDL_Rect postion_ecran;
 	SDL_Rect postion_sprite;
