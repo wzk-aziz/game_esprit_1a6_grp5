@@ -60,7 +60,16 @@ void animerEnnemiwalking(ennemi *e, SDL_Surface *screen)
                     
 void Ennemiwalking(ennemi *e)
 {
-	
+	if (e->postion_ecran>=700)
+	{
+		e->direction=1;
+		e->pas=randomer(10, 20);
+	}
+	if (e->postion_ecran<=0)
+	{
+		e->direction=2;
+		e->pas=randomer(10, 20);
+	}
 	if (e->pas==0)
 	{
 		e->direction=randomer(1, 2);
