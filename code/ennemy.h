@@ -15,7 +15,10 @@ typedef struct
 	SDL_Rect postion_sprite;
 	int ennemy_type;
 	int direction;
+	int pas;
 }ennemi;
 void animerEnnemiwalking(ennemi *e, SDL_Surface * screen);
+void Ennemiwalking(ennemi *e);
+int randomer(int min, int max) ;
 
 #endif // ENNEMY_H

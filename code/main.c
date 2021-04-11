@@ -23,9 +23,10 @@ int main()
     SDL_Flip(screen);
     
     while (continuer)
-    
+   { 
     animerEnnemiwalking(&E, screen);
-
+    Ennemiwalking(&E);
+    }
 }
 
 
