@@ -63,28 +63,37 @@ void Ennemiwalking(ennemi *e)
 	if (e->postion_ecran>=700)
 	{
 		e->direction=1;
-		e->pas=randomer(10, 20);
+		e->pas_afranchir=randomer(10, 20);
+		e->pas=e->pas_afranchir*2;
 	}
 	if (e->postion_ecran<=0)
 	{
 		e->direction=2;
-		e->pas=randomer(10, 20);
+		e->pas_afranchir=randomer(10, 20);
+		e->pas=e->pas_afranchir*2;
 	}
-	if (e->pas==0)
+	if (e->pas_afranchir==e->pas  && direction==1 )
 	{
-		e->direction=randomer(1, 2);
-		e->pas=randomer(10, 20);
+		direction=2;
 	}
-	if (e->direction==1 && e->pas!=0)
+	if (e->pas_afranchir==e->pas  && direction==2 )
 	{
-		e->postion_ecran.x-=1;
-		e->pas-=1;
+		direction=1;
 	}
-	if (e->direction==2 && e->pas!=0)
+	if (e->pas==0  && direction==1 )
 	{
-		e->postion_ecran.x+=2;
-		e->pas-=1;
+		direction=2;
+		e->pas_afranchir=randomer(10, 20);
+		e->pas=e->pas_afranchir*2;
 	}
+	if (e->pas==0  && direction==2 )
+	{
+		direction=1;
+		e->pas_afranchir=randomer(10, 20);
+		e->pas=e->pas_afranchir*2;
+	}
+	else 
+		e->pas--;
 SDL_Delay(16);
 }
 

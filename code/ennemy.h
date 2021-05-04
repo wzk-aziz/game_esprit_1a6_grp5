@@ -16,6 +16,8 @@ typedef struct
 	SDL_Rect postion_sprite;
 	int ennemy_type;
 	int direction;
+	int pas_afranchir;
+	int cycle;
 	int pas;
 }ennemi;
 void animerEnnemiwalking(ennemi *e, SDL_Surface * screen);
