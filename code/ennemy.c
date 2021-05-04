@@ -1,15 +1,46 @@
-
+#include <stdio.h>
+#include <stdlib.h>
+#include "SDL/SDL.h"
+#include<SDL/SDL_image.h>
+#include<SDL/SDL_mixer.h>
+#include <SDL/SDL_ttf.h>
+#include <time.h>
 #include "ennemy.h"
 #include "header.h"
 
+/**
+*
+*@file ennemy.c 
+*@brief fonctions file
+*@author aziz
+*
+*
+*
+*
+*
+*/
+
+
+
+/**
+*@brief mouvement character + animation du personnage
+*@param Event
+*@return rien
+*
+*
+*
+*
+*
+*/
+
 void animerEnnemiwalking(ennemi *e, SDL_Surface *screen)
 {
-	
+	// add pos sprite ffs 
 	e->postion_sprite.w=64;
 	e->postion_sprite.h=64;
 	
 	
-	//printf("///////////////////1\n");
+	//printf("///////////////////1\n");// just for errors 
 	if (e->direction == 1)
 	{
 		e->postion_sprite.y=128;
@@ -25,8 +56,7 @@ void animerEnnemiwalking(ennemi *e, SDL_Surface *screen)
 
 	if (e->direction == 2)
 	{   
-		
-		e->postion_sprite.y=192;
+		e->postion_sprite.y=190;
 		e->postion_sprite.x=e->postion_sprite.x+64;
 		if (e->postion_sprite.x>512)
 		{
@@ -57,23 +87,25 @@ void animerEnnemiwalking(ennemi *e, SDL_Surface *screen)
 	SDL_Flip((screen));
 }
 
-                    
+    //skelet walking frame by frame
+    //random moves 
+    //2 l 1 r                
 void Ennemiwalking(ennemi *e)
 {
-	if (e->postion_ecran>=700)
+	if (e->postion_ecran.x>=550)
 	{
 		e->direction=1;
-		e->pas=randomer(10, 20);
+		e->pas=randomer(50, 80);
 	}
-	if (e->postion_ecran<=0)
+	if (e->postion_ecran.x<=220)
 	{
 		e->direction=2;
-		e->pas=randomer(10, 20);
+		e->pas=randomer(50, 80);
 	}
 	if (e->pas==0)
 	{
-		e->direction=randomer(1, 2);
-		e->pas=randomer(10, 20);
+		e->direction=randomer(1,2);
+		e->pas=randomer(50, 80);
 	}
 	if (e->direction==1 && e->pas!=0)
 	{
@@ -85,9 +117,10 @@ void Ennemiwalking(ennemi *e)
 		e->postion_ecran.x+=2;
 		e->pas-=1;
 	}
-SDL_Delay(16);
+SDL_Delay(50);
 }
 
+//
 int randomer(int min, int max) 
 {
   return rand() % (max - min + 1) + min;;
