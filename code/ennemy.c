@@ -95,29 +95,55 @@ void Ennemiwalking(ennemi *e)
 	if (e->postion_ecran.x>=550)
 	{
 		e->direction=1;
+<<<<<<< HEAD
 		e->pas=randomer(50, 80);
+=======
+		e->pas_afranchir=randomer(10, 20);
+		e->pas=e->pas_afranchir*2;
+>>>>>>> 5ebc75c219063a67afc9897e6eb60fe6a39eb22d
 	}
 	if (e->postion_ecran.x<=220)
 	{
 		e->direction=2;
+<<<<<<< HEAD
 		e->pas=randomer(50, 80);
+=======
+		e->pas_afranchir=randomer(10, 20);
+		e->pas=e->pas_afranchir*2;
+>>>>>>> 5ebc75c219063a67afc9897e6eb60fe6a39eb22d
 	}
-	if (e->pas==0)
+	if (e->pas_afranchir==e->pas  && direction==1 )
 	{
+<<<<<<< HEAD
 		e->direction=randomer(1,2);
 		e->pas=randomer(50, 80);
+=======
+		direction=2;
+>>>>>>> 5ebc75c219063a67afc9897e6eb60fe6a39eb22d
 	}
-	if (e->direction==1 && e->pas!=0)
+	if (e->pas_afranchir==e->pas  && direction==2 )
 	{
-		e->postion_ecran.x-=1;
-		e->pas-=1;
+		direction=1;
 	}
-	if (e->direction==2 && e->pas!=0)
+	if (e->pas==0  && direction==1 )
 	{
-		e->postion_ecran.x+=2;
-		e->pas-=1;
+		direction=2;
+		e->pas_afranchir=randomer(10, 20);
+		e->pas=e->pas_afranchir*2;
 	}
+<<<<<<< HEAD
 SDL_Delay(50);
+=======
+	if (e->pas==0  && direction==2 )
+	{
+		direction=1;
+		e->pas_afranchir=randomer(10, 20);
+		e->pas=e->pas_afranchir*2;
+	}
+	else 
+		e->pas--;
+SDL_Delay(16);
+>>>>>>> 5ebc75c219063a67afc9897e6eb60fe6a39eb22d
 }
 
 //
